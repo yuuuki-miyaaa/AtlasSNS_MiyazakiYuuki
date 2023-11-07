@@ -39,8 +39,21 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    public function register(Request $request){
-        if($request->isMethod('post')){
+    public function register(Request $request)
+    {
+        if ($request->isMethod('post')) {
+
+            $request->validate([
+                //バリーデーションを設定
+                'username' => 'required|string|max:12|min:2',
+                'mail' => 'required|string|email|max:40|min:5|unique:users',
+                'password' => 'required|string|max:20|min:8|confirmed',
+                // 'username' => ['required', 'string', 'max:12', 'min:2'],
+                // 'mail' => ['required', 'string', 'email', 'max:40', 'min:5', 'unique:users'],
+                // 'password' => ['required', 'string', 'max:20', 'min:8', 'confirmed'],
+                //required:必須,string:文字列,max:最大文字数,min:最小文字数,
+                //email:メール型？,unique:一つの,confirmed:確認済み(一致するかどうか？)
+            ]);
 
             $username = $request->input('username');
             $mail = $request->input('mail');
@@ -52,12 +65,14 @@ class RegisterController extends Controller
                 'password' => bcrypt($password),
             ]);
 
-            return redirect('added');
+            return view('auth.added', compact('username'));
+            //redirectをviewに変更、変数の受け渡しに使うcompactでusernameを送る
         }
-        return view('auth.register');
+        return view('auth.register',);
     }
 
-    public function added(){
+    public function added()
+    {
         return view('auth.added');
     }
 }

@@ -175,6 +175,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Collective\Html\HtmlServiceProvider::class,
+        //HTMLのタグを省略したLaravel用の記述方法をまとめたライブラリを使用できるように
+
     ],
 
     /*
@@ -225,6 +228,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        //ライブラリの中の「html」と「Form」ファサード機能を使うという設定
 
     ],
 

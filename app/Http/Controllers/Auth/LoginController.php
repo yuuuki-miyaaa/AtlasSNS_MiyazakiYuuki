@@ -39,16 +39,34 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login(Request $request){
-        if($request->isMethod('post')){
+    public function login(Request $request)
+    {
+        if ($request->isMethod('post')) {
 
-            $data=$request->only('mail','password');
+            $data = $request->only('mail', 'password');
             // ログインが成功したら、トップページへ
             //↓ログイン条件は公開時には消すこと
-            if(Auth::attempt($data)){
+            if (Auth::attempt($data)) {
                 return redirect('/top');
             }
         }
         return view("auth.login");
+    }
+
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        //Laravelの認証ファザードを使用した、ログアウトメソッド
+
+        $request->session()->invalidate();
+        //リクエストから取得したセッションインスタンスに対して、invalidateメソッドを呼びだす
+        //このメソッドはセッションに保存されているデータを全て削除、セッションの無効にする
+
+        $request->session()->regenerateToken();
+        //セッションのCSRFトークンを再生成している
+        //セッションの無効後に再生成することで、セッション固定攻撃などから守る
+
+        return redirect('/login');
     }
 }
