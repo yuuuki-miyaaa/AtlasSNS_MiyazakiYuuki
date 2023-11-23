@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
             'username' => 'テストユーザー',
             'mail' => 'test@lull.com',
             'password' => Hash::make('test'),
+            'images' => 'icon1.png',
             //DBのusersテーブルに上記値を入れる
             //Hash::make関数でパスワードを保護(ハッシュ化する)
         ]);

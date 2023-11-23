@@ -20,7 +20,17 @@
 
 
 //ログアウト中のページ
+
+//use Symfony\Component\Routing\Route;
+//急に変わった？突然使えなくなり、下記コードに
+// use Illuminate\Support\Facades\Route;
+//下記コードも本当は必要なかった、調べたときに余計なコードも記載した？Gitで確認する
+
 Route::get('/login', 'Auth\LoginController@login');
+//↑だと(login)が見つからずミドルウェアが機能しない
+//↑return route('/login');からreturn url('/login');に変更で機能するように
+//Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+//名前をつけると機能する
 Route::post('/login', 'Auth\LoginController@login');
 
 Route::get('/register', 'Auth\RegisterController@register');
@@ -28,17 +38,32 @@ Route::post('/register', 'Auth\RegisterController@register');
 
 Route::get('/added', 'Auth\RegisterController@added');
 
+
 //ログイン中のページ
-Route::get('/top', 'PostsController@index');
-Route::post('/top', 'PostsController@index');
-//HTTPのPOSTリクエストメソッドを使ってこのルートにアクセス
+Route::group(
+  ['middleware' => 'auth'],
+  function () {
+    //ミドルウェア(認証ユーザーのみ表示される)
 
-Route::get('/profile', 'UsersController@profile');
+    Route::get('/top', 'PostsController@index');
+    Route::post('/top', 'PostsController@index');
+    //HTTPのPOSTリクエストメソッドを使ってこのルートにアクセス
 
-Route::get('/search', 'UsersController@search');
+    Route::post('/post/create', 'PostsController@postCreate');
+    //Route::get('/post/{id}/update-form', 'PostsController@updateForm');
+    //URLにログインユーザーのIDを入れてgetで送る
 
-Route::get('/follow-list', 'FollowsController@followList');
-Route::get('/follower-list', 'FollowsController@followerList');
+    Route::get('/post/{id}/delete', 'PostsController@delete');
+
+    Route::get('/profile', 'UsersController@profile');
+
+    Route::get('/search', 'UsersController@search');
+    Route::post('/search', 'UsersController@search');
+
+    Route::get('/follow-list', 'FollowsController@followList');
+    Route::get('/follower-list', 'FollowsController@followerList');
 
 
-Route::get('/logout', 'Auth\LoginController@logout');
+    Route::get('/logout', 'Auth\LoginController@logout');
+  }
+);

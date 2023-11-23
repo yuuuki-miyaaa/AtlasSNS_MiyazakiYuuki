@@ -13,6 +13,9 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UsersTableSeeder::class);
         $this->call(UsersTableSeeder::class);
-        //このrunメソッドが「sersTableSeeder」を呼び出すことで、そのファイル内のレコードを作成することができる
+        //このrunメソッドが「UsersTableSeeder」を呼び出すことで、そのファイル内のレコードを作成することができる
+
+        $this->call(PostsTableSeeder::class);
+        //このrunメソッドが「PostsTableSeeder」を呼び出す
     }
 }

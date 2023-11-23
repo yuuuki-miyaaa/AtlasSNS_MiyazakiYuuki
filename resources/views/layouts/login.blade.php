@@ -28,7 +28,7 @@
             <!-- hrefでTopページに、public/images/から正しい画像を選択 -->
             <div id="">
                 <div id="">
-                    <p>〇〇さん<img src="images/arrow.png"></p>
+                    <p>{{ auth()->user()->username }}さん<img src="{{ asset('images/'.auth()->user()->images) }}" alt="images"></p>
                     <div>
                         <ul>
                             <li><a href="/top">ホーム</a></li>
@@ -44,7 +44,7 @@
         </div>
         <div id="side-bar">
             <div id="confirm">
-                <p>〇〇さんの</p>
+                <p>{{ auth()->user()->username }}さんの</p>
                 <div>
                     <p>フォロー数</p>
                     <p>〇〇名</p>

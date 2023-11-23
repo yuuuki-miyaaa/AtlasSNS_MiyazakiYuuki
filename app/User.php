@@ -26,4 +26,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    // public function posts()
+    // {
+    //     return $this->hasMany(Post::class);
+    // }
+    //リレーションの定義
+    //ポストとユーザーをつなげる（一対多の多い側だからhasmanyを使う）
+    public function posts()
+    {
+        return $this->hasMany('App\post');
+    }
 }
