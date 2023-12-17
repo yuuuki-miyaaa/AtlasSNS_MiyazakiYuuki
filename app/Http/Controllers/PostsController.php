@@ -5,14 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 //postテーブルのデータ取得のためにpostクラスを使用
+use App\User;
+use App\Follow;
 
 class PostsController extends Controller
 {
     //indexメソッドの作成
     public function index()
     {
-        $posts = Post::get();
-        //Postテーブルから全てのレコード情報を取得する
+        // //Postテーブルから全てのレコード情報を取得する
+        // $posts = Post::get();
+        $followIds = auth()->user()->follows()->pluck('user_id');
+        $followIds[] = auth()->id();
+        //PHPで配列の末尾に新しい要素を追加するための構文
+        $posts = Post::whereIn('user_id', $followIds)->get();
+
         return view('posts.index', ['posts' => $posts]);
     }
 
@@ -36,10 +43,24 @@ class PostsController extends Controller
         return redirect('/top');
     }
 
-    public function updateForm($id)
+    public function updateForm(Request $request)
     {
-        $post = post::where('id', $id)->first();
-        return view('posts.updateForm', ['post' => $post]);
+        if ($request->isMethod('post')) {
+
+            $request->validate([
+                'post' => 'required|string|max:150|min:1',
+            ]);
+
+            $id = $request->input('id');
+            $up_post = $request->input('post');
+            //postを検索して更新
+            Post::where('id', $id)->update([
+                'post' => $up_post
+            ]);
+
+            return redirect('/top')->with('status', '投稿が更新されました！');
+        }
+        return view('/top');
     }
 
     public function delete($id)

@@ -17,5 +17,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(PostsTableSeeder::class);
         //このrunメソッドが「PostsTableSeeder」を呼び出す
+
+        $this->call(FollowsTableSeeder::class);
     }
 }

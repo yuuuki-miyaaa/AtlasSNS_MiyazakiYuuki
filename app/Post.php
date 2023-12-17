@@ -20,4 +20,17 @@ class Post extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    //postとfollowを繋げるリレーション定義
+    public function followPosts()
+    {
+        return $this->belongsToMany('App\Post', 'Follows', 'followed_id', 'following_id')
+            ->select(['posts.id as user_id', 'Follows.following_id', 'Follows.followed_id']);
+        //belongsToMany メソッドは多対多のリレーション
+    }
+    public function followerPosts()
+    {
+        return $this->belongsToMany('App\Post', 'Follows', 'following_id', 'followed_id')
+            ->select(['posts.id as user_id', 'Follows.following_id', 'Follows.followed_id']);
+    }
 }

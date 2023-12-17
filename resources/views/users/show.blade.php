@@ -2,26 +2,18 @@
 
 @section('content')
 
-{!! Form::open(['url' => '/search']) !!}
-
-<h2>【確認用】ここはユーザー検索画面です</h2>
-<!-- ルートの確認用 -->
-
-
+{!! Form::open(['url' => 'users/'. $user->id]) !!}
 <div class="container">
 
-  <form action="/search" method="post">
-    @csrf
-    <input type="text" name="keyword" class="form" placeholder="ユーザー名">
-    <button type="submit" class="btn btn-search"><img src="images/search.png" alt="検索"></button>
-  </form>
-  {{$word}}
-
-  <table class="user-area">
-    @foreach ($users as $user)
+  <table class="user_profile-area">
+    <img src="{{ asset('storage/images/'.$user->images) }}" alt="images">
     <tr>
-      <th><img src="{{ asset('storage/images/' .$user->images) }}" alt="images"></th>
-      <td>{{$user -> username}}</td>
+      <th>name:</th>
+      <td>{{ $user->username }}</td>
+    </tr>
+    <tr>
+      <th>bio:</th>
+      <td>{{ $user->bio }}</td>
 
 
       <td class="follow_btn_area">
@@ -40,10 +32,18 @@
         @endif
       </td>
     </tr>
-    @endforeach
   </table>
 
+
+  <table class="user_post-area">
+    @foreach ($posts as $post)
+    <tr>
+      <th><img src="{{ asset('storage/images/'.$post->user->images) }}" alt="images"></th>
+      <th>{{$post->user->username}}</th>
+      <td>{{$post->created_at}}</td>
+      <td>{{$post->post}}</td>
+    </tr>
+    @endforeach
+  </table>
 </div>
-
-
 @endsection

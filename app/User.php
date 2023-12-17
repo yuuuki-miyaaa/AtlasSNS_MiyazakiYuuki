@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Follow;
 
 class User extends Authenticatable
 {
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'mail', 'password',
+        'username', 'mail', 'password', 'bio', 'images'
     ];
 
     /**
@@ -36,5 +37,46 @@ class User extends Authenticatable
     public function posts()
     {
         return $this->hasMany('App\post');
+    }
+
+    //userとfollowを繋げるリレーション定義
+
+    //フォロワーの取得
+    public function followUsers()
+    {
+        return $this->belongsToMany('App\User', 'Follows', 'followed_id', 'following_id')
+            ->select(['users.id as user_id', 'Follows.following_id', 'Follows.followed_id']);
+        //belongsToMany メソッドは多対多のリレーション
+    }
+
+    //フォローしているユーザーの取得
+    public function follows()
+    {
+        return $this->belongsToMany('App\User', 'Follows', 'following_id', 'followed_id')
+            ->select(['users.id as user_id', 'Follows.following_id', 'Follows.followed_id']);
+    }
+
+    // フォローする
+    public function follow(Int $user_id)
+    {
+        return $this->follows()->attach($user_id);
+    }
+
+    // フォロー解除する
+    public function unfollow(Int $user_id)
+    {
+        return $this->follows()->detach($user_id);
+    }
+
+    // フォローしているか
+    public function isFollowing(Int $user_id)
+    {
+        return (bool) $this->follows()->where('followed_id', $user_id)->first(['id']);
+    }
+
+    // フォローされているか
+    public function isFollowed(Int $user_id)
+    {
+        return (bool) $this->followUsers()->where('following_id', $user_id)->first(['id']);
     }
 }

@@ -9,6 +9,7 @@
     <title></title>
     <link rel="stylesheet" href="{{ asset('css/reset.css') }} ">
     <link rel="stylesheet" href="{{ asset('css/style.css') }} ">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!--スマホ,タブレット対応-->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!--サイトのアイコン指定-->
@@ -24,19 +25,22 @@
 <body>
     <header>
         <div id="head">
-            <h1><a href="/top"><img src="images/atlas.png"></a></h1>
-            <!-- hrefでTopページに、public/images/から正しい画像を選択 -->
-            <div id="">
-                <div id="">
-                    <p>{{ auth()->user()->username }}さん<img src="{{ asset('images/'.auth()->user()->images) }}" alt="images"></p>
-                    <div>
-                        <ul>
-                            <li><a href="/top">ホーム</a></li>
-                            <li><a href="/profile">プロフィール</a></li>
-                            <li><a href="/logout">ログアウト</a></li>
-                        </ul>
-                    </div>
+            <nav class="nav_ber">
+                <h1><a href="/top"><img class="Atlas_image" src="images/atlas.png" alt="Atlas"></a></h1>
+                <!-- hrefでTopページに、public/images/から正しい画像を選択 -->
+
+                <div class="accordion">
+                    {{ auth()->user()->username }}さん
+                    <div class="accordion-title">V</div>
+                    <ul class="accordion-content">
+                        <li class="accordion-lists"><a href="/top">ホーム</a></li>
+                        <li class="accordion-lists"><a href="/profile">プロフィール</a></li>
+                        <li class="accordion-lists"><a href="/logout">ログアウト</a></li>
+                    </ul>
+                    <img src="{{ asset('storage/images/' . auth()->user()->images) }}" alt="images">
                 </div>
+            </nav>
+        </div>
     </header>
     <div id="row">
         <div id="container">
@@ -47,12 +51,12 @@
                 <p>{{ auth()->user()->username }}さんの</p>
                 <div>
                     <p>フォロー数</p>
-                    <p>〇〇名</p>
+                    <p>{{ $follow_count }}名</p>
                 </div>
                 <p class="btn"><a href="/follow-list">フォローリスト</a></p>
                 <div>
                     <p>フォロワー数</p>
-                    <p>〇〇名</p>
+                    <p>{{ $follower_count }}名</p>
                 </div>
                 <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
             </div>
@@ -61,8 +65,8 @@
     </div>
     <footer>
     </footer>
-    <script src="JavaScriptファイルのURL"></script>
-    <script src="JavaScriptファイルのURL"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 </body>
 
 </html>

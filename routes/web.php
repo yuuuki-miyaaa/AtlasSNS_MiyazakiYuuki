@@ -18,6 +18,7 @@
 
 //Auth::routes();
 
+use App\Http\Controllers\UserController;
 
 //ログアウト中のページ
 
@@ -53,12 +54,26 @@ Route::group(
     //Route::get('/post/{id}/update-form', 'PostsController@updateForm');
     //URLにログインユーザーのIDを入れてgetで送る
 
+    Route::get('/post/{id}/update-form', 'PostsController@updateForm');
+    Route::post('/post/{id}/update-form', 'PostsController@updateForm');
+
     Route::get('/post/{id}/delete', 'PostsController@delete');
 
     Route::get('/profile', 'UsersController@profile');
+    Route::post('/profile', 'UsersController@profile');
+
+    Route::get('/users/{id}', 'UsersController@show');
+    Route::post('/users/{user}', 'UsersController@follow')->name('follow');
+
+    // Route::post('/users/{id}', 'UsersController@follow')->name('follow');
+    Route::delete('/users/{user}', 'UsersController@unfollow')->name('unfollow');
 
     Route::get('/search', 'UsersController@search');
     Route::post('/search', 'UsersController@search');
+
+    Route::post('/follow/{user}', 'UsersController@follow')->name('follow');
+    Route::delete('/unfollow/{user}', 'UsersController@unfollow')->name('unfollow');
+    //Route::post()だと"このルートに対して DELETE メソッドはサポートされていません。サポートされているメソッド: POST"とった
 
     Route::get('/follow-list', 'FollowsController@followList');
     Route::get('/follower-list', 'FollowsController@followerList');

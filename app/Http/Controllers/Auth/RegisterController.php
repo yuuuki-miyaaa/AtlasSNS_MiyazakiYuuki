@@ -68,7 +68,7 @@ class RegisterController extends Controller
             return view('auth.added', compact('username'));
             //redirectをviewに変更、変数の受け渡しに使うcompactでusernameを送る
         }
-        return view('auth.register',);
+        return view('auth.register');
     }
 
     public function added()
