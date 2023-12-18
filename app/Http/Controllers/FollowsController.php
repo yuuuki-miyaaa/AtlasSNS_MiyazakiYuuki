@@ -22,7 +22,7 @@ class FollowsController extends Controller
         // $posts = Post::where('user_id', '!=', $auth)->get();
 
         $followIds = auth()->user()->follows()->pluck('user_id');
-        $posts = Post::whereIn('user_id', $followIds)->get();
+        $posts = Post::whereIn('user_id', $followIds)->orderBy('updated_at', 'desc')->get();
         $users = User::whereIn('id', $followIds)->get();
 
         return view('follows.followList', ['users' => $users, 'posts' => $posts]);
@@ -39,7 +39,7 @@ class FollowsController extends Controller
         // $posts = Post::where('user_id', '!=', $auth)->get();
 
         $followerIds = auth()->user()->followUsers()->pluck('user_id');
-        $posts = Post::whereIn('user_id', $followerIds)->get();
+        $posts = Post::whereIn('user_id', $followerIds)->orderBy('updated_at', 'desc')->get();
         $users = User::whereIn('id', $followerIds)->get();
 
         return view('follows.followerList', ['posts' => $posts, 'users' => $users]);

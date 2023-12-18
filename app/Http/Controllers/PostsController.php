@@ -18,7 +18,8 @@ class PostsController extends Controller
         $followIds = auth()->user()->follows()->pluck('user_id');
         $followIds[] = auth()->id();
         //PHPで配列の末尾に新しい要素を追加するための構文
-        $posts = Post::whereIn('user_id', $followIds)->get();
+        $posts = Post::whereIn('user_id', $followIds)->orderBy('updated_at', 'desc')->get();
+
 
         return view('posts.index', ['posts' => $posts]);
     }
