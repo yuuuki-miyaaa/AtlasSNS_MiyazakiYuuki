@@ -13,6 +13,18 @@
 
 {{ Form::submit('ログイン') }}
 
+@if($errors->any())
+<!-- $errors変数 バリデーションエラーがあるかのチェック -->
+<div class="alert alert-danger">
+  <!-- もしエラーがある場合、alertとalert-dangerというクラスを持つHTMLのdiv要素が作成(Bootstrapのクラス？) -->
+  <ul>
+    @foreach($errors->all() as $error)
+    <li>{{ $error }}</li>
+    @endforeach
+  </ul>
+</div>
+@endif
+
 <p><a href="/register">新規ユーザーの方はこちら</a></p>
 
 {!! Form::close() !!}

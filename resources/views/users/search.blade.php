@@ -4,27 +4,25 @@
 
 {!! Form::open(['url' => '/search']) !!}
 
-<h2>【確認用】ここはユーザー検索画面です</h2>
-<!-- ルートの確認用 -->
-
-
-<div class="container">
-
+<div class="search_area">
   <form action="/search" method="post">
     @csrf
-    <input type="text" name="keyword" class="form" placeholder="ユーザー名">
-    <button type="submit" class="btn btn-search"><img src="images/search.png" alt="検索"></button>
+    <input type="text" name="keyword" class="search_form" placeholder="　ユーザー名">
+    <button type="submit" class="btn btn-search"><img src="images/search.png" alt="検索" class="search_icon"></button>
   </form>
   {{$word}}
+</div>
 
-  <table class="user-area">
+<div class="post_container">
+  <div class="search_container">
     @foreach ($users as $user)
-    <tr>
-      <th><img src="{{ asset('storage/images/' .$user->images) }}" alt="images"></th>
-      <td>{{$user -> username}}</td>
+    <div class="user_area">
+      <div class="search_user">
+        <img src="{{ asset('storage/images/' .$user->images) }}" alt="images" class="icon_image">
+        {{$user -> username}}
+      </div>
 
-
-      <td class="follow_btn_area">
+      <div class="follow_btn_area">
         @if (auth()->user()->isFollowing($user->id))
         <form action="{{ route('unfollow', ['user' => $user->id]) }}" method="POST">
           {{ csrf_field() }}
@@ -38,11 +36,10 @@
           <button type="submit" class="btn btn-primary">フォローする</button>
         </form>
         @endif
-      </td>
-    </tr>
+      </div>
+    </div>
     @endforeach
-  </table>
-
+  </div>
 </div>
 
 

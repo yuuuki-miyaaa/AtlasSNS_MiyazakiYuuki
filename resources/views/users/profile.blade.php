@@ -6,45 +6,46 @@
 <!-- フォームがファイルのアップロードをするにはエンコードタイプの設定が必要 -->
 <!-- 'files' => trueは、enctype="multipart/form-data"をフォームタグに追加する -->
 
-<h2>【確認用】ここはプロフィールです</h2>
-<!--  ルートの確認用 -->
+<div class="profile_container">
 
-<table class="profile-area">
+  <div class="profile_area">
+    <img src="{{ asset('storage/images/' . auth()->user()->images) }}" alt="images" class="icon_image">
+    <div class="user_area">
+      {{ Form::label('ユーザー名') }}
+      {{ Form::text('username',auth()->user()->username,['class' => 'input']) }}</div>
+    <!-- 第２引数にデフォルト値でログインユーザー情報を設定 -->
 
-  <img src="{{ asset('storage/images/' . auth()->user()->images) }}" alt="images">
-  {{ Form::label('ユーザー名') }}
-  {{ Form::text('username',auth()->user()->username,['class' => 'input']) }}
-  <!-- 第２引数にデフォルト値でログインユーザー情報を設定 -->
+    <div class="user_area">{{ Form::label('メールアドレス') }}
+      {{ Form::text('mail',auth()->user()->mail,['class' => 'input']) }}</div>
 
-  <p>{{ Form::label('メールアドレス') }}
-    {{ Form::text('mail',auth()->user()->mail,['class' => 'input']) }}</p>
+    <div class="user_area">{{ Form::label('パスワード') }}
+      {{ Form::password('password',null,['class' => 'input']) }}</div>
 
-  <p>{{ Form::label('パスワード') }}
-    {{ Form::password('password',null,['class' => 'input']) }}</p>
+    <div class="user_area">{{ Form::label('パスワード確認') }}
+      {{ Form::password('password_confirmation',null,['class' => 'input']) }}</div>
 
-  <p>{{ Form::label('パスワード確認') }}
-    {{ Form::password('password_confirmation',null,['class' => 'input']) }}</p>
+    <div class="user_area">{{ Form::label('bio') }}
+      {{ Form::textarea('bio',auth()->user()->bio,['class' => 'input', 'id' => 'bio_text']) }}</div>
 
-  <p>{{ Form::label('bio') }}
-    {{ Form::text('bio',auth()->user()->bio,['class' => 'input']) }}</p>
+    <div class="user_area">{{ Form::label('icon_image') }}
+      {{ Form::file('icon_images',null,['class' => 'input']) }}</div>
 
-  <p>{{ Form::label('icon_image') }}
-    {{ Form::file('icon_image',null,['class' => 'input']) }}</p>
+    <div class="pf_btn_area">
+      {{ Form::submit('更新',['class' => 'btn btn-primary']) }}
+    </div>
+    {!! Form::close() !!}
 
-  {{ Form::submit('更新',['class' => 'btn btn-primary']) }}
-  {!! Form::close() !!}
-
-  @if($errors->any())
-  <!-- $errors変数 バリデーションエラーがあるかのチェック -->
-  <div class="alert alert-danger">
-    <!-- もしエラーがある場合、alertとalert-dangerというクラスを持つHTMLのdiv要素が作成(Bootstrapのクラス？) -->
-    <ul>
-      @foreach($errors->all() as $error)
-      <li>{{ $error }}</li>
-      @endforeach
-    </ul>
+    @if($errors->any())
+    <!-- $errors変数 バリデーションエラーがあるかのチェック -->
+    <div class="alert alert-danger">
+      <!-- もしエラーがある場合、alertとalert-dangerというクラスを持つHTMLのdiv要素が作成(Bootstrapのクラス？) -->
+      <ul>
+        @foreach($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
+    @endif
   </div>
-  @endif
-
-</table>
+</div>
 @endsection

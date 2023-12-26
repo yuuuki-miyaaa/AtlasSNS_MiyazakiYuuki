@@ -125,7 +125,7 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-        $posts = Post::whereIn('user_id', $id)->orderBy('updated_at', 'desc')->get();
+        $posts = Post::where('user_id', $id)->orderBy('updated_at', 'desc')->get();
 
         return view('users.show', compact('user', 'posts'));
     }

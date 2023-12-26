@@ -2,7 +2,7 @@
 
 @section('content')
 
-{!! Form::open(['url' => 'users/'. $user->id]) !!}
+{!! Form::open(['url' => url('users', $user->id)]) !!}
 <div class="container">
 
   <table class="user_profile-area">
@@ -40,8 +40,8 @@
     <tr>
       <th><img src="{{ asset('storage/images/'.$post->user->images) }}" alt="images"></th>
       <th>{{$post->user->username}}</th>
-      <td>{{$post->created_at}}</td>
-      <td>{{$post->post}}</td>
+      <td>{{$post->created_at->format('Y-m-d H:i')}}</td>
+      <td>{!! nl2br(e($post->post)) !!}</td>
     </tr>
     @endforeach
   </table>
