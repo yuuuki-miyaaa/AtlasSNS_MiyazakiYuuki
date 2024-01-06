@@ -26,7 +26,7 @@
     <header>
         <div id="head">
             <nav class="nav_ber">
-                <h1><a href="/top"><img class="Atlas_image" src="images/atlas.png" alt="Atlas"></a></h1>
+                <h1><a href="/top"><img class="Atlas_image" src="{{ asset('storage/images/atlas.png') }}" alt="Atlas"></a></h1>
                 <!-- hrefでTopページに、public/images/から正しい画像を選択 -->
 
                 <div class="accordion">
@@ -37,7 +37,7 @@
                         <li class="accordion-lists"><a href="/profile">プロフィール</a></li>
                         <li class="accordion-lists"><a href="/logout">ログアウト</a></li>
                     </ul>
-                    <img src="{{ asset('storage/images/' . auth()->user()->images) }}" alt="images" class="icon_image">
+                    <a href="/top"><img src="{{ asset('storage/images/' . auth()->user()->images) }}" alt="images" class="icon_image"></a>
                 </div>
             </nav>
         </div>

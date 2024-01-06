@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <!--IEブラウザ対策-->
@@ -7,6 +8,7 @@
   <meta name="description" content="ページの内容を表す文章" />
   <title></title>
   <link rel="stylesheet" href="{{ asset('css/reset.css') }} ">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="{{ asset('css/logout.css') }} ">
   <!--スマホ,タブレット対応-->
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -19,6 +21,7 @@
   <link rel="apple-touch-icon-precomposed" href="画像のURL" />
   <!--OGPタグ/twitterカード-->
 </head>
+
 <body>
   <header>
     <h1><img src="images/atlas.png"></h1>
@@ -30,4 +33,5 @@
   <script src="JavaScriptファイルのURL"></script>
   <script src="JavaScriptファイルのURL"></script>
 </body>
+
 </html>

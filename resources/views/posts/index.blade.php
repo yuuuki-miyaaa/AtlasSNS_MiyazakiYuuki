@@ -23,6 +23,18 @@
 
 <div class="post_container">
 
+  @if($errors->any())
+  <!-- $errors変数 バリデーションエラーがあるかのチェック -->
+  <div class="alert alert-danger">
+    <!-- もしエラーがある場合、alertとalert-dangerというクラスを持つHTMLのdiv要素が作成(Bootstrapのクラス？) -->
+    <ul>
+      @foreach($errors->all() as $error)
+      <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  </div>
+  @endif
+
   @if($posts->isNotEmpty())
   @foreach ($posts as $post)
   <div class="post-area">
@@ -68,16 +80,5 @@
 <p>投稿がまだありません。</p>
 @endif
 
-@if($errors->any())
-<!-- $errors変数 バリデーションエラーがあるかのチェック -->
-<div class="alert alert-danger">
-  <!-- もしエラーがある場合、alertとalert-dangerというクラスを持つHTMLのdiv要素が作成(Bootstrapのクラス？) -->
-  <ul>
-    @foreach($errors->all() as $error)
-    <li>{{ $error }}</li>
-    @endforeach
-  </ul>
-</div>
-@endif
 
 @endsection

@@ -4,21 +4,32 @@
 <!-- 適切なURLを入力してください -->
 {!! Form::open(['url' => '/register']) !!}
 
-<h2>新規ユーザー登録</h2>
+<div class="register_area">
+  <p class="login_title">新規ユーザー登録</p>
 
-{{ Form::label('ユーザー名') }}
-{{ Form::text('username',null,['class' => 'input']) }}
+  <div class="login_box">
+    {{ Form::label('user name') }}
+    {{ Form::text('username',null,['class' => 'input']) }}
+  </div>
+  <div class="login_box">
+    {{ Form::label('mail address') }}
+    {{ Form::text('mail',null,['class' => 'input']) }}
+  </div>
+  <div class="login_box">
+    {{ Form::label('password') }}
+    {{ Form::password('password',null,['class' => 'input']) }}
+  </div>
+  <div class="login_box">
+    {{ Form::label('password confirm') }}
+    {{ Form::password('password_confirmation',null,['class' => 'input']) }}
+  </div>
 
-{{ Form::label('メールアドレス') }}
-{{ Form::text('mail',null,['class' => 'input']) }}
+  <div class="login_btn">
+    <button type="submit" class="btn btn-danger">REGISTER</button>
+  </div>
 
-{{ Form::label('パスワード') }}
-{{ Form::password('password',null,['class' => 'input']) }}
-
-{{ Form::label('パスワード確認') }}
-{{ Form::password('password_confirmation',null,['class' => 'input']) }}
-
-{{ Form::submit('登録') }}
+  <p class="new_user"><a href="/login">ログイン画面へ戻る</a></p>
+</div>
 
 @if($errors->any())
 <!-- $errors変数 バリデーションエラーがあるかのチェック -->
@@ -32,9 +43,6 @@
 </div>
 @endif
 
-<p><a href="/login">ログイン画面へ戻る</a></p>
-
 {!! Form::close() !!}
-
 
 @endsection

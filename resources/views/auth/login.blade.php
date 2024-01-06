@@ -4,14 +4,19 @@
 <!-- 適切なURLを入力してください -->
 {!! Form::open(['url' => '/login']) !!}
 
-<p>AtlasSNSへようこそ</p>
+<div class="login_area">
+  <p class="login_title">AtlasSNSへようこそ</p>
 
-{{ Form::label('e-mail') }}
-{{ Form::text('mail',null,['class' => 'input']) }}
-{{ Form::label('password') }}
-{{ Form::password('password',['class' => 'input']) }}
+  <div class="login_box">{{ Form::label('email address') }}
+    {{ Form::text('mail',null,['class' => 'input']) }}</div>
+  <div class="login_box">{{ Form::label('password') }}
+    {{ Form::password('password',['class' => 'input']) }}</div>
+  <div class="login_btn">
+    <button type="submit" class="btn btn-danger">LOGIN</button>
+  </div>
+  <p class="new_user"><a href="/register">新規ユーザーの方はこちら</a></p>
+</div>
 
-{{ Form::submit('ログイン') }}
 
 @if($errors->any())
 <!-- $errors変数 バリデーションエラーがあるかのチェック -->
@@ -24,8 +29,6 @@
   </ul>
 </div>
 @endif
-
-<p><a href="/register">新規ユーザーの方はこちら</a></p>
 
 {!! Form::close() !!}
 
