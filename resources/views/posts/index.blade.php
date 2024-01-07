@@ -42,7 +42,7 @@
         <a href="{{ url('users/' . $post->user->id) }}" class="icon_area"><img src="{{ asset('storage/images/'.$post->user->images) }}" alt="icon_images" class="icon_image"></a>
         <div class="post-content">
           <div>
-            <div class="post-name"><a href="{{ url('users/' . $post->user->id) }}">{{$post->user->username}}</a></div>
+            <div class="post-name"><a href="{{ url('users/' . $post->user->id) }}" style="color: black; text-decoration: none;">{{$post->user->username}}</a></div>
             <div>{{$post->created_at->format('Y-m-d H:i')}}</div>
           </div>
           <div>
@@ -69,8 +69,7 @@
       {{ Form::textarea('post', null, ['class' => 'input', 'id' => 'post-text']) }}
 
       <p class="up_btn">
-        <button type="button" class="btn btn-light">戻る</button>
-        {{ Form::submit('更新', ['class' => 'btn btn-primary']) }}
+        {{ Form::submit('Submit', ['class' => 'btn-update']) }}
       </p>
       {!! Form::close() !!}
     </div>

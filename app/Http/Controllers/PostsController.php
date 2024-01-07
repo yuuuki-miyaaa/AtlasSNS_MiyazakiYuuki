@@ -47,7 +47,7 @@ class PostsController extends Controller
     public function updateForm(Request $request)
     {
         if ($request->isMethod('post')) {
-
+            // dd($request);
             $request->validate([
                 'post' => 'required|string|max:150|min:1',
             ]);

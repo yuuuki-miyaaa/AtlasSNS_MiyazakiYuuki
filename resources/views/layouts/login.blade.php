@@ -26,7 +26,7 @@
     <header>
         <div id="head">
             <nav class="nav_ber">
-                <h1><a href="/top"><img class="Atlas_image" src="{{ asset('storage/images/atlas.png') }}" alt="Atlas"></a></h1>
+                <h1><a href="/top"><img class="Atlas_image" src="{{ asset('images/atlas.png') }}" alt="Atlas"></a></h1>
                 <!-- hrefでTopページに、public/images/から正しい画像を選択 -->
 
                 <div class="accordion">
