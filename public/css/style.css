@@ -8,6 +8,7 @@ html {
 
 body {
     width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
 }
@@ -15,7 +16,7 @@ body {
 /* 共通エリア */
 .post_container {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     border-top: 5px solid lightgray;
 }
 
@@ -406,15 +407,14 @@ header {
 }
 
 .user_pf_box {
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     gap: 10px;
     width: 100%;
 }
 
-.label {
-    width: 50px;
-    margin-right: 150px;
+.pf_label {
+    width: 300px;
 }
 
 .content {
@@ -423,5 +423,5 @@ header {
 }
 
 .pf_follow_btn {
-    margin-top: 70px;
+    margin-top: 60px;
 }

@@ -96,3 +96,13 @@ header p {
     text-decoration: none;
     font-size: 1.2rem;
 }
+
+.add_title {
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.add_text {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}

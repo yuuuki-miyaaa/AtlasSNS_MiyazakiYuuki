@@ -9,11 +9,11 @@
 
   <div class="user_pf_box">
     <div class="user_area">
-      <span class="label">name:</span>
+      <span class="pf_label">name:</span>
       <span class="content">{{ $user->username }}</span>
     </div>
     <div class="user_area">
-      <span class="label">bio:</span>
+      <span class="pf_label">bio:</span>
       <span class="content">{{ $user->bio }}</span>
     </div>
   </div>

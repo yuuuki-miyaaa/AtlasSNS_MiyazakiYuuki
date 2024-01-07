@@ -22,7 +22,6 @@
 {!! Form::close() !!}
 
 <div class="post_container">
-
   @if($errors->any())
   <!-- $errors変数 バリデーションエラーがあるかのチェック -->
   <div class="alert alert-danger">
@@ -60,25 +59,25 @@
     </ul>
   </div>
   @endforeach
-</div>
 
-<div id="modal" class="modal">
-  <div class="modal_content">
-    {!! Form::open(['id' => 'update-form', 'method' => 'post']) !!}
-    {{ Form::hidden('id', $post->id) }}
-    <!-- {{ Form::input('text', 'post', null, ['class' => 'input', 'id' => 'post-text']) }} -->
-    {{ Form::textarea('post', null, ['class' => 'input', 'id' => 'post-text']) }}
 
-    <p class="up_btn">
-      <button type="button" class="btn btn-light">戻る</button>
-      {{ Form::submit('更新', ['class' => 'btn btn-primary']) }}
-    </p>
-    {!! Form::close() !!}
+  <div id="modal" class="modal">
+    <div class="modal_content">
+      {!! Form::open(['id' => 'update-form', 'method' => 'post']) !!}
+      {{ Form::hidden('id', $post->id) }}
+      <!-- {{ Form::input('text', 'post', null, ['class' => 'input', 'id' => 'post-text']) }} -->
+      {{ Form::textarea('post', null, ['class' => 'input', 'id' => 'post-text']) }}
+
+      <p class="up_btn">
+        <button type="button" class="btn btn-light">戻る</button>
+        {{ Form::submit('更新', ['class' => 'btn btn-primary']) }}
+      </p>
+      {!! Form::close() !!}
+    </div>
   </div>
+  @else
+  <p>投稿がまだありません。</p>
+  @endif
+
 </div>
-@else
-<p>投稿がまだありません。</p>
-@endif
-
-
 @endsection
