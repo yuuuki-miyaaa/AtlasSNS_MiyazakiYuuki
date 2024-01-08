@@ -53,30 +53,40 @@
               <a class="btn-delete" href="/post/{{$post->id}}/delete" onclick="return confirm('このPostを削除してもよろしいでしょうか？')"></a>
             </div>
           </div>
+          @endif
         </div>
-        @endif
       </li>
     </ul>
   </div>
   @endforeach
-
-
-  <div id="modal" class="modal">
-    <div class="modal_content">
-      {!! Form::open(['id' => 'update-form', 'method' => 'post']) !!}
-      {{ Form::hidden('id', $post->id) }}
-      <!-- {{ Form::input('text', 'post', null, ['class' => 'input', 'id' => 'post-text']) }} -->
-      {{ Form::textarea('post', null, ['class' => 'input', 'id' => 'post-text']) }}
-
-      <p class="up_btn">
-        {{ Form::submit('Submit', ['class' => 'btn-update']) }}
-      </p>
-      {!! Form::close() !!}
-    </div>
-  </div>
-  @else
-  <p>投稿がまだありません。</p>
-  @endif
-
 </div>
+<div id="updateModal" class="modal">
+  <div class="modal_content">
+    {!! Form::open(['method' => 'post', 'id' => 'update-form']) !!}
+    <!-- <form id="update-form" action="" method="post"> -->
+    <input type="hidden" name="id" value="">
+    <textarea name="post" id="post-text"></textarea>
+    <button type="submit" class="btn_update_modal">更新</button>
+    <!-- </form> -->
+    {!! Form::close() !!}
+  </div>
+</div>
+
+<!-- <div id="modal" class="modal">
+  <div class="modal_content">
+    {!! Form::open(['method' => 'post', 'id' => 'update-form']) !!}
+    {{ Form::hidden('id', $post->id) }}
+    {{ Form::textarea('post', null, ['class' => 'input', 'id' => 'post-text']) }}
+
+    <p class="up_btn">
+      {{ Form::submit('Submit', ['class' => 'btn-update']) }}
+    </p>
+    {!! Form::close() !!}
+  </div>
+</div> -->
+@else
+<p>投稿がまだありません。</p>
+@endif
+
+
 @endsection

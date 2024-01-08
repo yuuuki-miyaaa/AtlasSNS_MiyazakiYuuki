@@ -46,6 +46,7 @@ class PostsController extends Controller
 
     public function updateForm(Request $request)
     {
+        // dd($request->all());
         if ($request->isMethod('post')) {
             // dd($request);
             $request->validate([

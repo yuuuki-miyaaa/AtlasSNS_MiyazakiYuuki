@@ -54,7 +54,7 @@ Route::group(
     //Route::get('/post/{id}/update-form', 'PostsController@updateForm');
     //URLにログインユーザーのIDを入れてgetで送る
 
-    Route::get('/post/{id}/update-form', 'PostsController@updateForm');
+    // Route::get('/post/{id}/update-form', 'PostsController@updateForm');
     Route::post('/post/{id}/update-form', 'PostsController@updateForm');
 
     Route::get('/post/{id}/delete', 'PostsController@delete');
